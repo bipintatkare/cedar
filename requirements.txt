@@ -7,3 +7,4 @@ pandas
 django-partial-date
 python-jose
 requests
+icalendar
