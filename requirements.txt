@@ -8,3 +8,4 @@ django-partial-date
 python-jose
 requests
 icalendar
+whitenoise
