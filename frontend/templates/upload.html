@@ -1,0 +1,272 @@
+{% extends 'admin-base.html' %} {% block content %} {% load static %}
+<!-- <link rel="stylesheet" href="/static/team.css" /> -->
+<!-- <script src="/static/team.js"></script> -->
+
+<style>
+  #errorsign,
+  .error {
+    /* display: none; */
+    text-align: center;
+    position: absolute;
+    right: 0;
+    z-index: 200;
+
+    border-radius: 8px;
+    margin-right: 10px;
+    transition: 0.5s;
+    width: 0px;
+  }
+  .next-prev {
+    margin-bottom: 20px;
+  }
+  .next-previn {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  .prev {
+    color: blue;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  .next {
+    color: blue;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .page-no {
+  }
+  .cap-in {
+    /* margin-left: 10px; */
+    margin-bottom: 10px;
+  }
+
+  .righthead {
+    margin-left: auto;
+    display: flex;
+  }
+  .headcreate {
+    font-size: 14px;
+    color: #0000ff;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  .headsearch {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .searchfilters {
+    transition: 0.3s;
+    display: flex;
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    align-items: center;
+    padding: 0 10px;
+  }
+  .filterbut {
+    width: 100px;
+    height: 35px;
+    margin-left: auto;
+    color: #fff;
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+  }
+  .clearbut {
+    width: 100px;
+    height: 35px;
+    margin-right: auto;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  .filtname {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  .filterbox {
+    border-radius: 3px;
+    /* border: none; */
+    padding: 5px;
+    border: 1px solid palevioletred;
+    min-width: 100px;
+    max-width: 137px;
+    margin-right: 10px;
+  }
+  .align-center {
+    margin: 10px;
+    text-align: center;
+  }
+  /*  */
+</style>
+
+<link rel="stylesheet" type="text/css" href="{% static 'toastr.css' %}" />
+<script src="{% static 'toastr.min.js' %}"></script>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ex-component-toastr.css' %}"
+/>
+<style>
+  #toast-container > .toast-error {
+    background-color: #bd362f;
+  }
+</style>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6"></div>
+      </div>
+      <div id="errorsign" class="alert-box"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="container">
+      <main role="main" class="pb-3">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="" style="width: 100%;">
+                  <div
+                    class="card"
+                    style="
+                      border-bottom: 1px solid #e5e5e5;
+                      box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+                      border: 1px solid rgba(0, 0, 0, 0.2);
+                      border-radius: 6px;
+                      outline: 0;
+                      max-width: 300px;
+                      margin: auto;
+                    "
+                  >
+                    <div
+                      class="card-body table-responsive p-0"
+                      style="padding: 5px !important;"
+                    >
+                      <div class="dialog">
+                        <div class="flex">
+                          <label for="">Xlsx file</label>
+                          <input
+                            class="form-control"
+                            type="file"
+                            id="xlsx"
+                            accept=".xlsx"
+                            placeholder="Name"
+                          />
+                        </div>
+
+                        <div class="flex">
+                          <label for="">Ics file</label>
+                          <input
+                            class="form-control"
+                            type="file"
+                            id="ics"
+                            accept=".ics"
+                            placeholder="Name"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="flex">
+                        <button
+                          type="button"
+                          class="btn btn-block btn-primary"
+                          style="
+                            width: 100px;
+                            margin: auto;
+                            margin-top: 30px;
+
+                            color: #fff;
+                            background-color: #337ab7;
+                            border-color: #2e6da4;
+                          "
+                          onclick="Upload(event)"
+                          data-translate="Yes"
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  var sessionId = getCookie("session_id_$cedar");
+  sessionId = sessionId.slice(1, -1);
+
+  //
+  //
+  //
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  function Upload() {
+    var fd = new FormData();
+    var xlsx = $("#xlsx")[0].files;
+    var ics = $("#ics")[0].files;
+
+    if (xlsx.length > 0) {
+      fd.append("xlsx", xlsx[0]);
+    } else {
+      toastr.error("Upload an xlsx file");
+      return;
+    }
+    if (ics.length > 0) {
+      fd.append("ics", ics[0]);
+    } else {
+      toastr.error("Upload an ics file");
+      return;
+    }
+    fd.append("sessionId", sessionId);
+    $.ajax({
+      type: "POST",
+      url: "/api/v1/upload/",
+      data: fd,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data.hasOwnProperty("error")) {
+          toastr.clear();
+          toastr.error(data["error"]);
+        } else {
+          toastr.clear();
+          console.log(data);
+          toastr.success("File uploaded successfully.");
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
+        }
+      },
+      error: function (data) {
+        console.log("Error!");
+      },
+    });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'login.js' %}"></script>
+    <link rel="preload" as="style" href="{% static 'login.css' %}" />
+    <link rel="stylesheet" href="{% static 'login.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'toastr.css' %}" />
+    <script src="{% static 'toastr.min.js' %}"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'ex-component-toastr.css' %}"
+    />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN</title>
+    <style></style>
+  </head>
+  <body>
+    <main class="main">
+      <div class="container">
+        <section class="wrapper">
+          <div class="heading">
+            <h1 class="text text-large">Sign In</h1>
+          </div>
+          <form name="signin" class="form">
+            <div class="input-control">
+              <label for="email" class="input-label" hidden
+                >Email Address</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="input-field"
+                placeholder="Email Address"
+              />
+            </div>
+            <div class="input-control">
+              <label for="password" class="input-label" hidden>Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                class="input-field"
+                placeholder="Password"
+              />
+            </div>
+            <div class="input-control" style="justify-content: center;">
+              <!-- <a href="#" class="text text-links">Forgot Password</a> -->
+              <button name="submit" class="input-submit" onclick="login(event)">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
+
+<script>
+
+</script>

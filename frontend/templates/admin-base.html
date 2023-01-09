@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .popup {
+        align-items: center;
+        display: none;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background: transparent;
+        z-index: 1000;
+        opacity: 2;
+      }
+      .popup > .card {
+        /* box-shadow: 11px 12px 5px -6px rgba(0, 0, 0, 0.41);
+  -webkit-box-shadow: 11px 12px 5px -6px rgba(0, 0, 0, 0.41); */
+        /* -moz-box-shadow: 11px 12px 5px -6px rgba(0, 0, 0, 0.41); */
+        padding: 20px;
+        opacity: 1 !important;
+        margin: auto;
+        width: 450px;
+        border-radius: 10px;
+        max-height: 600px;
+      }
+
+      .popin {
+        width: 400px;
+        margin-left: auto;
+        height: 100px;
+        margin-right: auto;
+        margin-top: 100px;
+      }
+      .imgdiv {
+        justify-content: center;
+        text-align: center;
+      }
+      .btn1 {
+        width: 140px;
+        -webkit-border-radius: 7;
+        -moz-border-radius: 7;
+        border-radius: 7px;
+        font-family: "Courier New";
+        color: #000000;
+        font-size: 16px;
+        background: #ffffff;
+        padding: 5px 20px 5px 20px;
+        border: solid #000000 1px;
+        text-decoration: none;
+        margin-top: 17px;
+        cursor: pointer;
+      }
+      .dialog {
+        text-align: center;
+      }
+      .flex {
+        display: flex;
+      }
+
+      .btn1:hover {
+        text-decoration: none;
+      }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-translate="Admin">Admin</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Google Font: Source Sans Pro -->
+   
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script> -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" /> -->
+    
+    
+   
+   
+   
+   
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="/static/plugins/fontawesome-free/css/all.min.css"
+    />
+    <!-- IonIcons -->
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/adminlte.min.css" />
+
+    <script></script>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav
+        style="background: #172b4c; color: #fff !important;"
+        class="main-header navbar navbar-expand navbar-white navbar-light"
+      >
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a
+              style="color: #fff;"
+              class="nav-link"
+              data-widget="pushmenu"
+              href="#"
+              role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+        </ul>
+
+        <h1
+          class="m-0"
+          style="font-size: 1.8rem;"
+          data-translate="{{page_name}}"
+          id="title"
+        >
+          {{page_name}}
+        </h1>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+
+          <!-- Messages Dropdown Menu -->
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside
+        style="background-color: #fff !important;"
+        class="main-sidebar sidebar-dark-primary elevation-4"
+      >
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="/static/img/logo.jpeg"
+                class="img-circle elevation-2"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a
+                href="/dashboard/"
+                style="color: #000000;"
+                class="d-block"
+                data-translate="Admin panel"
+                >Hi, {{name}}</a
+              >
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <!-- <li class="nav-item">
+                <a href="/dashboard/" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p data-translate="Dashboard">Dashboard</p>
+                </a>
+              </li> -->
+
+              <li class="nav-item">
+                <a href="/monthly/" class="nav-link">
+                  <i class="nav-icon fas fa-dollar-sign"></i>
+                  <p data-translate="Dashboard">Monthly data</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/cleaning/" class="nav-link">
+                  <i class="nav-icon fas fa-broom"></i>
+                  <p data-translate="Dashboard">Cleaning</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/keys/" class="nav-link">
+                  <i class="nav-icon fas fa-key"></i>
+                  <p data-translate="Dashboard">Keys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/revenue/" class="nav-link">
+                  <i class="nav-icon fas fa-dollar-sign"></i>
+                  <p data-translate="Dashboard">Revenue</p>
+                </a>
+              </li>
+
+             
+
+              <li class="nav-item">
+                <a href="/tax/" class="nav-link">
+                  <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                  <p data-translate="Dashboard">Tax</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/calendar/" class="nav-link">
+                  <i class="nav-icon fas fa-calendar"></i>
+                  <p data-translate="Dashboard">Calendar</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/capital/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p data-translate="Dashboard">Capital expenditure</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/costs/" class="nav-link">
+                  <i class="nav-icon fas fa-credit-card"></i>
+                  <p data-translate="Dashboard">Costs</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/map" class="nav-link">
+                  <i class="nav-icon fas fa-map"></i>
+                  <p data-translate="Dashboard">Map</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/uploaddata" class="nav-link">
+                  <i class="nav-icon fas fa-upload"></i>
+                  <p data-translate="Dashboard">Upload data</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="" class="nav-link" onclick="showLogout(event)">
+                  <i class="nav-icon fas fa-sign-out-alt"></i>
+                  <p data-translate="Logout">Logout</p>
+                </a>
+              </li>
+
+              <!-- <div id="google_translate_element"></div> -->
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <div class="popup" id="logoutpop" style="display: none;">
+        <div
+          class="card"
+          style="
+            border-bottom: 1px solid #e5e5e5;
+            box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            outline: 0;
+          "
+        >
+          <div
+            class="card-body table-responsive p-0"
+            style="padding: 5px !important;"
+          >
+            <div
+              class="dialog"
+              data-translate="Are you sure , you want to logout?"
+            >
+              Are you sure , you want to logout?
+            </div>
+
+            <div class="flex">
+              <button
+                type="button"
+                class="btn btn-block btn-primary"
+                style="
+                  width: 100px;
+                  margin-left: auto;
+                  margin-top: 30px;
+                  margin-right: 5px;
+                  color: #fff;
+                  background-color: #337ab7;
+                  border-color: #2e6da4;
+                "
+                onclick="logout(event)"
+                data-translate="Yes"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                class="btn btn-block btn-primary"
+                style="
+                  width: 100px;
+                  margin-right: auto;
+                  margin-top: 30px;
+                  margin-left: 5px;
+                  color: #333;
+                  background-color: #fff;
+                  border-color: #ccc;
+                "
+                data-translate="No"
+                onclick="hideLogout()"
+              >
+                No
+              </button>
+            </div>
+          </div>
+          <!--  -->
+        </div>
+      </div>
+
+      <!-- Content Wrapper. Contains page content -->
+      {% block content %} {% endblock %}
+
+      <!-- /.content-wrapper -->
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <strong>
+          <span data-translate="Copyright">Copyright</span> &copy; 2021-2022
+          <a href="" data-translate="{{site_name}}">{{site_name}}</a>.</strong
+        >
+        <span data-translate="All rights reserved.">All rights reserved.</span>
+
+        <div class="float-right d-none d-sm-inline-block">
+          <b>Version</b> 1.0
+        </div>
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="/static/dist/js/adminlte.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="/static/plugins/chart.js/Chart.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="/static/dist/js/demo.js"></script> -->
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/static/dist/js/pages/dashboard3.js"></script>
+
+    <script>
+      var sessionId = getCookie("session_id_$cedar");
+      sessionId = sessionId.slice(1, -1);
+
+      //
+      //
+      //
+      function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0)
+            return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+      }
+
+      //
+      //
+
+      function showLogout(event) {
+        event.preventDefault();
+        document.getElementById("logoutpop").style.display = "flex";
+      }
+      function hideLogout() {
+        document.getElementById("logoutpop").style.display = "none";
+      }
+      function logout(event) {
+        event.preventDefault();
+        $.ajax({
+          url: "/api/v1/logout/",
+          type: "POST",
+          data: { sessionId: sessionId },
+          success: function (data) {
+            console.log(data);
+            if (data.hasOwnProperty("error")) {
+              console.log(data["error"]);
+            } else {
+              window.location.replace("/");
+            }
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+
+ -->
